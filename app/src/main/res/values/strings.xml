@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">navi_assignment</string>
+    <string name="main_heading">All Closed Pull Requests</string>
 </resources>
