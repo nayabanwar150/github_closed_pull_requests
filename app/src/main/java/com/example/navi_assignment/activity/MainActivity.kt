@@ -13,6 +13,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.navi_assignment.R
 import com.example.navi_assignment.adapter.ClosedPullRequestAdapter
 import com.example.navi_assignment.databinding.ActivityMainBinding
+import com.example.navi_assignment.model.PullRequestDataItem
 import com.example.navi_assignment.model.PullRequestModel
 import com.example.navi_assignment.network.Result
 import com.example.navi_assignment.viewmodel.MainViewModel
@@ -22,14 +23,14 @@ class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
     private lateinit var viewModel: MainViewModel
     private var adapter: ClosedPullRequestAdapter? = null
-    private lateinit var closedPullRequestData: PullRequestModel
+    private var closedPullRequestData: PullRequestModel = PullRequestModel()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = DataBindingUtil.setContentView(this,R.layout.activity_main)
 
         viewModel = ViewModelProvider(this).get(MainViewModel::class.java)
-        viewModel.getClosedPullRequestData("Sample_Repo")
+//        viewModel.getClosedPullRequestData("Sample_Repo")
         viewModel.getAllRepos()
 
         viewModel.repoList.observe(this){
@@ -54,7 +55,7 @@ class MainActivity : AppCompatActivity() {
                             p2: Int,
                             p3: Long
                         ) {
-//                            viewModel.getClosedPullRequestData(reposOptions[p2])
+                            viewModel.getClosedPullRequestData(reposOptions[p2])
                         }
 
                         override fun onNothingSelected(p0: AdapterView<*>?) {
@@ -62,7 +63,7 @@ class MainActivity : AppCompatActivity() {
 
                     }
                 }
-             }
+            }
         }
 
         viewModel.closedPullRequestData.observe(this) {
@@ -75,12 +76,16 @@ class MainActivity : AppCompatActivity() {
                     Log.i("Response", "${it.data?.get(0)?.user?.login}")
                     if (adapter == null) {
                         Log.i("Adapter", "inside adapter")
-                        closedPullRequestData = it.data!!
+                        it.data?.forEach {
+                            closedPullRequestData.add(it)
+                        }
                         adapter = ClosedPullRequestAdapter(closedPullRequestData, this)
                         binding.rcUsersList.layoutManager = LinearLayoutManager(this@MainActivity)
                         binding.rcUsersList.adapter = adapter
                     } else {
-                        closedPullRequestData = it.data!!
+                        it.data?.forEach {
+                            closedPullRequestData.add(it)
+                        }
                         adapter?.notifyDataSetChanged()
                     }
                     binding.mainProgressBar.visibility = View.GONE
@@ -93,7 +98,8 @@ class MainActivity : AppCompatActivity() {
                     binding.noRecordFound.visibility = View.VISIBLE
                 }
                 else -> {
-                    Toast.makeText(this@MainActivity, "No Records Found!", Toast.LENGTH_SHORT).show()
+                    closedPullRequestData.clear()
+                    adapter?.notifyDataSetChanged()
                     binding.mainProgressBar.visibility = View.GONE
                     binding.noRecordFound.visibility = View.VISIBLE
                 }
