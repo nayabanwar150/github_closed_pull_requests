@@ -38,6 +38,7 @@ class MainRepo {
     fun getClosedPullRequestData(repoName: String) {
         CoroutineScope(Dispatchers.IO).async {
             try {
+                _closedPullRequestData.postValue(Result.Loading())
                 var response = service?.getClosedPullList(repoName)
                 if (response != null) {
                     _closedPullRequestData.postValue(Result.Success(response.body()))

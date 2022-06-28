@@ -45,7 +45,8 @@
                 android:id="@+id/repos_dropdown"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:text="Sample_Repo"
+                android:textSize="12sp"
+                android:textColor="@color/grey_text_color"
                 android:spinnerMode="dialog"/>
 
             </LinearLayout>
@@ -93,16 +94,30 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/main_heading"
-                app:layout_constraintBottom_toTopOf="@id/pagination" />
+                app:layout_constraintBottom_toTopOf="parent" />
 
-            <!--Pagination-->
-            <LinearLayout
-                android:id="@+id/pagination"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+            <!-- No Records Found -->
+            <ImageView
+                android:id="@+id/no_record_found"
+                android:layout_width="300dp"
+                android:layout_height="300dp"
+                android:src="@drawable/ic_no_record_found"
+                android:visibility="gone"
                 app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                android:orientation="horizontal" />
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <!-- Loader -->
+            <ProgressBar
+                android:id="@+id/main_progress_bar"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:indeterminateTint="@color/main_color"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.constraintlayout.widget.ConstraintLayout>
