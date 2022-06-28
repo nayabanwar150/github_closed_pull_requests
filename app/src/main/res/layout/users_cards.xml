@@ -23,6 +23,7 @@
             android:id="@+id/user_details"
             android:layout_width="match_parent"
             android:layout_height="0dp"
+            android:background="@color/white"
             android:orientation="vertical"
             app:layout_constraintTop_toBottomOf="@+id/card_header"
             app:layout_constraintBottom_toBottomOf="parent">
@@ -44,15 +45,18 @@
                 android:layout_width="55dp"
                 android:layout_height="55dp"
                 app:cardCornerRadius="250dp"
+                app:cardElevation="0dp"
                 app:cardBackgroundColor="@color/white">
 
                 <androidx.cardview.widget.CardView
                     android:layout_width="50dp"
                     android:layout_height="50dp"
                     app:cardCornerRadius="250dp"
-                    android:layout_gravity="center">
+                    android:layout_gravity="center"
+                    app:cardBackgroundColor="@color/white">
 
                     <ImageView
+                        android:id="@+id/user_profile_pic"
                         android:layout_width="50dp"
                         android:layout_height="50dp"
                         android:src="@drawable/ic_launcher_background"
@@ -64,6 +68,7 @@
         </LinearLayout>
 
         <TextView
+            android:id="@+id/user_name"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Mohd Nayab Anwar"
@@ -87,6 +92,7 @@
             app:layout_constraintBottom_toBottomOf="parent">
 
             <TextView
+                android:id="@+id/pull_request_title"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Closed Pull Request Title"
@@ -112,6 +118,7 @@
                     android:textSize="14sp" />
 
                 <TextView
+                    android:id="@+id/created_on"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="27 Jun 2022"
@@ -136,6 +143,7 @@
                     android:textSize="14sp" />
 
                 <TextView
+                    android:id="@+id/closed_on"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="27 Jun 2022"
